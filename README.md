@@ -62,19 +62,19 @@ The project combines language learning with simple typing gameplay.
 
 ## 今後の予定 / Planned Features
 ### 日本語
-1.日本語 → 韓国語タイピングモード
-2.プレイヤー人数のカウント
-3.ランキング機能
-4.演出・UIの強化
-5.単語帳機能
+1. 日本語 → 韓国語タイピングモード
+2. プレイヤー人数のカウント
+3. ランキング機能
+4. 演出・UIの強化
+5. 単語帳機能
 ※ 開発状況により変更される可能性があります。
 
 ### English
-1.Japanese to Korean typing mode
-2.Player count tracking
-3.Ranking / score system
-4.Improved animations and UI
-5.Vocabulary List feature
+1. Japanese to Korean typing mode
+2. Player count tracking
+3. Ranking / score system
+4. Improved animations and UI
+5. Vocabulary List feature
 *Plans may change during development.
 
 ## 注意・免責事項 / Disclaimer
