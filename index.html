@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>MapleStory Typing</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
   <h1>MapleStory Typing</h1>
+
   <div id="question">라라</div>
-  <input id="input" placeholder="Type in romaji" />
+
+  <input
+    id="input"
+    type="text"
+    autocomplete="off"
+    spellcheck="false"
+    placeholder="Type romaji..."
+  />
+
+  <div id="result" hidden>
+    <p id="answer-ja"></p>
+    <img id="answer-image" alt="">
+  </div>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
