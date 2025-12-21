@@ -1,7 +1,7 @@
-const answer = "ringo";
+const answer = "rara";
 
 input.addEventListener("input", e => {
   if (e.target.value === answer) {
-    alert("Correct!");
+    alert("正解!");
   }
 });
