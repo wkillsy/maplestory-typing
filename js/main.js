@@ -1,7 +1,7 @@
-const answer = "rara";
+input.addEventListener("input", () => {
+  const value = input.value.toLowerCase();
 
-input.addEventListener("input", e => {
-  if (e.target.value === answer) {
-    alert("正解!");
+  if (question.romaji.includes(value)) {
+    // 正解処理
   }
 });
