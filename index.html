@@ -1,30 +1,61 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>MapleStory Typing</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <h1>MapleStory Typing</h1>
+  <!-- 16:9 ゲーム画面 -->
+  <div id="game-container">
 
-  <div id="question">-라라-</div>
+    <!-- メニュー画面 -->
+    <div class="screen" id="screen-menu">
+      <h1>MapleStory Typing</h1>
+      <ul class="menu">
+        <li data-mode="ko-ja">韓国語 → 日本語</li>
+        <li data-mode="ja-ko">日本語 → 韓国語</li>
+        <li data-mode="img-ja">画像 → 日本語</li>
+        <li data-mode="img-ko">画像 → 韓国語</li>
+        <li data-mode="vocab">単語帳</li>
+      </ul>
+      <p class="hint">↑↓ で選択 / Enter 決定</p>
+    </div>
 
-  <input
-    id="input"
-    type="text"
-    autocomplete="off"
-    spellcheck="false"
-    placeholder="Type romaji..."
-  />
+    <!-- 難易度選択 -->
+    <div class="screen hidden" id="screen-difficulty">
+      <h2>Difficulty</h2>
+      <ul class="menu">
+        <li data-level="easy">EASY</li>
+        <li data-level="normal">NORMAL</li>
+        <li data-level="hard">HARD</li>
+      </ul>
+      <p class="hint">Enter で開始</p>
+    </div>
 
-  <div id="result" hidden>
-    <p id="answer-ja"></p>
-    <img id="answer-image" alt="">
+    <!-- WIP -->
+    <div class="screen hidden" id="screen-wip">
+      <h2>準備中 (WIP)</h2>
+      <p>このモードは現在開発中です</p>
+    </div>
+
+    <!-- ゲーム画面 -->
+    <div class="screen hidden" id="screen-game">
+      <div id="question"></div>
+      <div id="typed"></div>
+      <input id="input" autocomplete="off" spellcheck="false">
+    </div>
+
+    <!-- 結果画面 -->
+    <div class="screen hidden" id="screen-result">
+      <h2>Result</h2>
+      <p id="score"></p>
+      <p class="hint">F5 で再スタート</p>
+    </div>
+
   </div>
 
   <script src="js/main.js"></script>
 </body>
 </html>
-
