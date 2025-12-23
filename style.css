@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+  background: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: sans-serif;
+}
+
+#game-container {
+  width: 1280px;
+  height: 720px;
+  background: #222;
+  color: #fff;
+  padding: 40px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.screen {
+  width: 100%;
+  height: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+}
+
+.menu li {
+  padding: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.menu li.active {
+  background: #444;
+}
+
+.hint {
+  margin-top: 20px;
+  color: #aaa;
+}
+
+#question {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+#typed {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+#input {
+  font-size: 24px;
+  width: 100%;
+  padding: 10px;
+}
