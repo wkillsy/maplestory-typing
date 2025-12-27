@@ -1,0 +1,921 @@
+{
+  "job": [
+    {
+      "id": 1,
+      "jp_display": "ヒーロー",
+      "jp_hiragana": [
+        "ひ",
+        "ー",
+        "ろ",
+        "ー"
+      ],
+      "kr_display": "히어로",
+      "difficulty": 2
+    },
+    {
+      "id": 2,
+      "jp_display": "パラディン",
+      "jp_hiragana": [
+        "ぱ",
+        "ら",
+        "で",
+        "ぃ",
+        "ん"
+      ],
+      "kr_display": "팔라딘",
+      "difficulty": 2
+    },
+    {
+      "id": 3,
+      "jp_display": "ダークナイト",
+      "jp_hiragana": [
+        "だ",
+        "ー",
+        "く",
+        "な",
+        "い",
+        "と"
+      ],
+      "kr_display": "다크나이트",
+      "difficulty": 3
+    },
+    {
+      "id": 4,
+      "jp_display": "ソウルマスター",
+      "jp_hiragana": [
+        "そ",
+        "う",
+        "る",
+        "ま",
+        "す",
+        "た",
+        "ー"
+      ],
+      "kr_display": "소울마스터",
+      "difficulty": 3
+    },
+    {
+      "id": 5,
+      "jp_display": "ミハエル",
+      "jp_hiragana": [
+        "み",
+        "は",
+        "え",
+        "る"
+      ],
+      "kr_display": "미하일",
+      "difficulty": 2
+    },
+    {
+      "id": 6,
+      "jp_display": "デ一モンスレイヤー",
+      "jp_hiragana": [
+        "で",
+        "ー",
+        "も",
+        "ん",
+        "す",
+        "れ",
+        "い",
+        "や",
+        "ー"
+      ],
+      "kr_display": "데몬슬레이어",
+      "difficulty": 3
+    },
+    {
+      "id": 7,
+      "jp_display": "デーモンアヴェンジャー",
+      "jp_hiragana": [
+        "で",
+        "ー",
+        "も",
+        "ん",
+        "あ",
+        "ヴ",
+        "ぇ",
+        "ん",
+        "じ",
+        "ゃ",
+        "ー"
+      ],
+      "kr_display": "데몬어벤져",
+      "difficulty": 3
+    },
+    {
+      "id": 8,
+      "jp_display": "ブラスター",
+      "jp_hiragana": [
+        "ぶ",
+        "ら",
+        "す",
+        "た",
+        "ー"
+      ],
+      "kr_display": "블래스터",
+      "difficulty": 3
+    },
+    {
+      "id": 9,
+      "jp_display": "アラン",
+      "jp_hiragana": [
+        "あ",
+        "ら",
+        "ん"
+      ],
+      "kr_display": "아란",
+      "difficulty": 1
+    },
+    {
+      "id": 10,
+      "jp_display": "カイザー",
+      "jp_hiragana": [
+        "か",
+        "い",
+        "ざ",
+        "ー"
+      ],
+      "kr_display": "카이저",
+      "difficulty": 2
+    },
+    {
+      "id": 11,
+      "jp_display": "アデル",
+      "jp_hiragana": [
+        "あ",
+        "で",
+        "る"
+      ],
+      "kr_display": "아델",
+      "difficulty": 1
+    },
+    {
+      "id": 12,
+      "jp_display": "ゼロ",
+      "jp_hiragana": [
+        "ぜ",
+        "ろ"
+      ],
+      "kr_display": "제로",
+      "difficulty": 1
+    },
+    {
+      "id": 13,
+      "jp_display": "レン",
+      "jp_hiragana": [
+        "れ",
+        "ん"
+      ],
+      "kr_display": "렌",
+      "difficulty": 1
+    },
+    {
+      "id": 14,
+      "jp_display": "火毒",
+      "jp_hiragana": [
+        "ひ",
+        "ど",
+        "く"
+      ],
+      "kr_display": "불독",
+      "difficulty": 1
+    },
+    {
+      "id": 15,
+      "jp_display": "氷雷",
+      "jp_hiragana": [
+        "ひ",
+        "ょ",
+        "う",
+        "ら",
+        "い"
+      ],
+      "kr_display": "썬콜",
+      "difficulty": 1
+    },
+    {
+      "id": 16,
+      "jp_display": "ビショップ",
+      "jp_hiragana": [
+        "び",
+        "し",
+        "ょ",
+        "っ",
+        "ぷ"
+      ],
+      "kr_display": "비숍",
+      "difficulty": 1
+    },
+    {
+      "id": 17,
+      "jp_display": "フレイムウィザード",
+      "jp_hiragana": [
+        "ふ",
+        "れ",
+        "い",
+        "む",
+        "う",
+        "ぃ",
+        "ざ",
+        "ー",
+        "ど"
+      ],
+      "kr_display": "플레임위자드",
+      "difficulty": 3
+    },
+    {
+      "id": 18,
+      "jp_display": "バトルメイジ",
+      "jp_hiragana": [
+        "ば",
+        "と",
+        "る",
+        "め",
+        "い",
+        "じ"
+      ],
+      "kr_display": "배틀메이지",
+      "difficulty": 3
+    },
+    {
+      "id": 19,
+      "jp_display": "エヴァン",
+      "jp_hiragana": [
+        "え",
+        "ヴ",
+        "ぁ",
+        "ん"
+      ],
+      "kr_display": "에반",
+      "difficulty": 1
+    },
+    {
+      "id": 20,
+      "jp_display": "ルミナス",
+      "jp_hiragana": [
+        "る",
+        "み",
+        "な",
+        "す"
+      ],
+      "kr_display": "루미너스",
+      "difficulty": 3
+    },
+    {
+      "id": 21,
+      "jp_display": "イリウム",
+      "jp_hiragana": [
+        "い",
+        "り",
+        "う",
+        "む"
+      ],
+      "kr_display": "일리움",
+      "difficulty": 2
+    },
+    {
+      "id": 22,
+      "jp_display": "キネシス",
+      "jp_hiragana": [
+        "き",
+        "ね",
+        "し",
+        "す"
+      ],
+      "kr_display": "키네시스",
+      "difficulty": 3
+    },
+    {
+      "id": 23,
+      "jp_display": "ララ",
+      "jp_hiragana": [
+        "ら",
+        "ら"
+      ],
+      "kr_display": "라라",
+      "difficulty": 1
+    },
+    {
+      "id": 24,
+      "jp_display": "ボウマスター",
+      "jp_hiragana": [
+        "ぼ",
+        "う",
+        "ま",
+        "す",
+        "た",
+        "ー"
+      ],
+      "kr_display": "보우마스터",
+      "difficulty": 3
+    },
+    {
+      "id": 25,
+      "jp_display": "クロスボウマスター",
+      "jp_hiragana": [
+        "く",
+        "ろ",
+        "す",
+        "ぼ",
+        "う",
+        "ま",
+        "す",
+        "た",
+        "ー"
+      ],
+      "kr_display": "신궁",
+      "difficulty": 1
+    },
+    {
+      "id": 26,
+      "jp_display": "パスファインダー",
+      "jp_hiragana": [
+        "ぱ",
+        "す",
+        "ふ",
+        "ぁ",
+        "い",
+        "ん",
+        "だ",
+        "ー"
+      ],
+      "kr_display": "패스파인더",
+      "difficulty": 3
+    },
+    {
+      "id": 27,
+      "jp_display": "ウィンドシューター",
+      "jp_hiragana": [
+        "う",
+        "ぃ",
+        "ん",
+        "ど",
+        "し",
+        "ゅ",
+        "ー",
+        "た",
+        "ー"
+      ],
+      "kr_display": "윈드브레이커",
+      "difficulty": 3
+    },
+    {
+      "id": 28,
+      "jp_display": "ワイルドハンタ一",
+      "jp_hiragana": [
+        "わ",
+        "い",
+        "る",
+        "ど",
+        "は",
+        "ん",
+        "た",
+        "ー"
+      ],
+      "kr_display": "와일드헌터",
+      "difficulty": 3
+    },
+    {
+      "id": 29,
+      "jp_display": "メルセデス",
+      "jp_hiragana": [
+        "め",
+        "る",
+        "せ",
+        "で",
+        "す"
+      ],
+      "kr_display": "메르세데스",
+      "difficulty": 3
+    },
+    {
+      "id": 30,
+      "jp_display": "カイン",
+      "jp_hiragana": [
+        "か",
+        "い",
+        "ん"
+      ],
+      "kr_display": "카인",
+      "difficulty": 1
+    },
+    {
+      "id": 31,
+      "jp_display": "ナイトロード",
+      "jp_hiragana": [
+        "な",
+        "い",
+        "と",
+        "ろ",
+        "ー",
+        "ど"
+      ],
+      "kr_display": "나이트로드",
+      "difficulty": 3
+    },
+    {
+      "id": 32,
+      "jp_display": "シャドー",
+      "jp_hiragana": [
+        "し",
+        "ゃ",
+        "ど",
+        "ー"
+      ],
+      "kr_display": "섀도어",
+      "difficulty": 2
+    },
+    {
+      "id": 33,
+      "jp_display": "デュアルブレイド",
+      "jp_hiragana": [
+        "で",
+        "ゅ",
+        "あ",
+        "る",
+        "ぶ",
+        "れ",
+        "い",
+        "ど"
+      ],
+      "kr_display": "듀얼블레이드",
+      "difficulty": 3
+    },
+    {
+      "id": 34,
+      "jp_display": "ナイトウォーカー",
+      "jp_hiragana": [
+        "な",
+        "い",
+        "と",
+        "う",
+        "ぉ",
+        "ー",
+        "か",
+        "ー"
+      ],
+      "kr_display": "나이트워커",
+      "difficulty": 3
+    },
+    {
+      "id": 35,
+      "jp_display": "ゼノン",
+      "jp_hiragana": [
+        "ぜ",
+        "の",
+        "ん"
+      ],
+      "kr_display": "제논",
+      "difficulty": 1
+    },
+    {
+      "id": 36,
+      "jp_display": "ファントム",
+      "jp_hiragana": [
+        "ふ",
+        "ぁ",
+        "ん",
+        "と",
+        "む"
+      ],
+      "kr_display": "팬텀",
+      "difficulty": 1
+    },
+    {
+      "id": 37,
+      "jp_display": "カデナ",
+      "jp_hiragana": [
+        "か",
+        "で",
+        "な"
+      ],
+      "kr_display": "카데나",
+      "difficulty": 2
+    },
+    {
+      "id": 38,
+      "jp_display": "虎影",
+      "jp_hiragana": [
+        "こ",
+        "が",
+        "げ"
+      ],
+      "kr_display": "호영",
+      "difficulty": 1
+    },
+    {
+      "id": 39,
+      "jp_display": "カーリー",
+      "jp_hiragana": [
+        "か",
+        "ー",
+        "り",
+        "ー"
+      ],
+      "kr_display": "칼리",
+      "difficulty": 1
+    },
+    {
+      "id": 40,
+      "jp_display": "バイパー",
+      "jp_hiragana": [
+        "ば",
+        "い",
+        "ぱ",
+        "ー"
+      ],
+      "kr_display": "바이퍼",
+      "difficulty": 2
+    },
+    {
+      "id": 41,
+      "jp_display": "キャプテン",
+      "jp_hiragana": [
+        "き",
+        "ゃ",
+        "ぷ",
+        "て",
+        "ん"
+      ],
+      "kr_display": "캡틴",
+      "difficulty": 1
+    },
+    {
+      "id": 42,
+      "jp_display": "キャノンシュ一ター",
+      "jp_hiragana": [
+        "き",
+        "ゃ",
+        "の",
+        "ん",
+        "し",
+        "ゅ",
+        "ー",
+        "た",
+        "ー"
+      ],
+      "kr_display": "캐논슈터",
+      "difficulty": 3
+    },
+    {
+      "id": 43,
+      "jp_display": "ストライカー",
+      "jp_hiragana": [
+        "す",
+        "と",
+        "ら",
+        "い",
+        "か",
+        "ー"
+      ],
+      "kr_display": "스트라이커",
+      "difficulty": 3
+    },
+    {
+      "id": 44,
+      "jp_display": "ゼノン",
+      "jp_hiragana": [
+        "ぜ",
+        "の",
+        "ん"
+      ],
+      "kr_display": "제논",
+      "difficulty": 1
+    },
+    {
+      "id": 45,
+      "jp_display": "メカニック",
+      "jp_hiragana": [
+        "め",
+        "か",
+        "に",
+        "っ",
+        "く"
+      ],
+      "kr_display": "메카닉",
+      "difficulty": 2
+    },
+    {
+      "id": 46,
+      "jp_display": "隠月",
+      "jp_hiragana": [
+        "ゆ",
+        "え"
+      ],
+      "kr_display": "은월",
+      "difficulty": 1
+    },
+    {
+      "id": 47,
+      "jp_display": "エンジェリックバスター",
+      "jp_hiragana": [
+        "え",
+        "ん",
+        "じ",
+        "ぇ",
+        "り",
+        "っ",
+        "く",
+        "ば",
+        "す",
+        "た",
+        "ー"
+      ],
+      "kr_display": "엔젤릭버스터",
+      "difficulty": 3
+    },
+    {
+      "id": 48,
+      "jp_display": "アーク",
+      "jp_hiragana": [
+        "あ",
+        "ー",
+        "く"
+      ],
+      "kr_display": "아크",
+      "difficulty": 1
+    }
+  ],
+  "boss": [
+    {
+      "id": 1,
+      "jp_display": "バンバン",
+      "jp_hiragana": [
+        "ば",
+        "ん",
+        "ば",
+        "ん"
+      ],
+      "kr_display": "반반",
+      "difficulty": 1
+    },
+    {
+      "id": 2,
+      "jp_display": "ピエール",
+      "jp_hiragana": [
+        "ぴ",
+        "え",
+        "ー",
+        "る"
+      ],
+      "kr_display": "피에르",
+      "difficulty": 2
+    },
+    {
+      "id": 3,
+      "jp_display": "ブラッディクイーン",
+      "jp_hiragana": [
+        "ぶ",
+        "ら",
+        "っ",
+        "で",
+        "ぃ",
+        "く",
+        "い",
+        "ー",
+        "ん"
+      ],
+      "kr_display": "블러디 퀸",
+      "difficulty": 3
+    },
+    {
+      "id": 4,
+      "jp_display": "ベルルム",
+      "jp_hiragana": [
+        "べ",
+        "る",
+        "る",
+        "む"
+      ],
+      "kr_display": "벨룸",
+      "difficulty": 1
+    },
+    {
+      "id": 5,
+      "jp_display": "シグナス",
+      "jp_hiragana": [
+        "し",
+        "ぐ",
+        "な",
+        "す"
+      ],
+      "kr_display": "시그너스",
+      "difficulty": 3
+    },
+    {
+      "id": 6,
+      "jp_display": "ビシャス",
+      "jp_hiragana": [
+        "び",
+        "し",
+        "ゃ",
+        "す"
+      ],
+      "kr_display": "파풀라투스",
+      "difficulty": 3
+    },
+    {
+      "id": 7,
+      "jp_display": "スウ",
+      "jp_hiragana": [
+        "す",
+        "う"
+      ],
+      "kr_display": "스우",
+      "difficulty": 1
+    },
+    {
+      "id": 8,
+      "jp_display": "デミアン",
+      "jp_hiragana": [
+        "で",
+        "み",
+        "あ",
+        "ん"
+      ],
+      "kr_display": "데미안",
+      "difficulty": 2
+    },
+    {
+      "id": 9,
+      "jp_display": "ガーディアンエンジェルスライム",
+      "jp_hiragana": [
+        "が",
+        "ー",
+        "で",
+        "ぃ",
+        "あ",
+        "ん",
+        "え",
+        "ん",
+        "じ",
+        "ぇ",
+        "る",
+        "す",
+        "ら",
+        "い",
+        "む"
+      ],
+      "kr_display": "가디언 엔젤 슬라임",
+      "difficulty": 3
+    },
+    {
+      "id": 10,
+      "jp_display": "ルシード",
+      "jp_hiragana": [
+        "る",
+        "し",
+        "ー",
+        "ど"
+      ],
+      "kr_display": "루시드",
+      "difficulty": 2
+    },
+    {
+      "id": 11,
+      "jp_display": "ウィル",
+      "jp_hiragana": [
+        "う",
+        "ぃ",
+        "る"
+      ],
+      "kr_display": "윌",
+      "difficulty": 1
+    },
+    {
+      "id": 12,
+      "jp_display": "ダスク",
+      "jp_hiragana": [
+        "だ",
+        "す",
+        "く"
+      ],
+      "kr_display": "더스크",
+      "difficulty": 2
+    },
+    {
+      "id": 13,
+      "jp_display": "真ヒルラ",
+      "jp_hiragana": [
+        "し",
+        "ん",
+        "ひ",
+        "る",
+        "ら"
+      ],
+      "kr_display": "진힐라",
+      "difficulty": 2
+    },
+    {
+      "id": 14,
+      "jp_display": "デュンケル",
+      "jp_hiragana": [
+        "で",
+        "ゅ",
+        "ん",
+        "け",
+        "る"
+      ],
+      "kr_display": "듄켈",
+      "difficulty": 1
+    },
+    {
+      "id": 15,
+      "jp_display": "暗黒の魔法使い",
+      "jp_hiragana": [
+        "あ",
+        "ん",
+        "こ",
+        "く",
+        "の",
+        "ま",
+        "ほ",
+        "う",
+        "つ",
+        "か",
+        "い"
+      ],
+      "kr_display": "검은 마법사",
+      "difficulty": 3
+    },
+    {
+      "id": 16,
+      "jp_display": "セレン",
+      "jp_hiragana": [
+        "せ",
+        "れ",
+        "ん"
+      ],
+      "kr_display": "세렌",
+      "difficulty": 1
+    },
+    {
+      "id": 17,
+      "jp_display": "カロス",
+      "jp_hiragana": [
+        "か",
+        "ろ",
+        "す"
+      ],
+      "kr_display": "칼로스",
+      "difficulty": 2
+    },
+    {
+      "id": 18,
+      "jp_display": "カリーン",
+      "jp_hiragana": [
+        "か",
+        "り",
+        "ー",
+        "ん"
+      ],
+      "kr_display": "카링",
+      "difficulty": 1
+    },
+    {
+      "id": 19,
+      "jp_display": "リンボ",
+      "jp_hiragana": [
+        "り",
+        "ん",
+        "ぼ"
+      ],
+      "kr_display": "림보",
+      "difficulty": 1
+    },
+    {
+      "id": 20,
+      "jp_display": "バルドリックス",
+      "jp_hiragana": [
+        "ば",
+        "る",
+        "ど",
+        "り",
+        "っ",
+        "く",
+        "す"
+      ],
+      "kr_display": "발드릭스",
+      "difficulty": 3
+    },
+    {
+      "id": 21,
+      "jp_display": "最初の対敵者",
+      "jp_hiragana": [
+        "さ",
+        "い",
+        "し",
+        "ょ",
+        "の",
+        "た",
+        "い",
+        "て",
+        "き",
+        "し",
+        "ゃ"
+      ],
+      "kr_display": "최초의 대적자",
+      "difficulty": 3
+    }
+  ]
+}
