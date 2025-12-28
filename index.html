@@ -8,61 +8,44 @@
 <body>
 
 <div id="app">
-  <!-- MENU -->
+
+  <!-- =====================
+       MENU SCREEN
+  ====================== -->
   <div id="screen-menu" class="screen active">
+
     <h1>Typing Game</h1>
-    <ul class="menu" id="menu-list">
-      <li data-mode="JP_ROMA">日本語 → ローマ字</li>
-      <li data-mode="KR_JP_ROMA">韓国語 → 日本語ローマ字</li>
-      <li data-mode="JP_KR">日本語 → 韓国語</li>
-      <li data-mode="IMG_JP">画像 → 日本語</li>
-      <li data-mode="IMG_KR">画像 → 韓国語</li>
-      <li data-mode="WORD">単語帳</li>
+
+    <ul id="menu-list" class="menu">
+      <li class="menu-item selected" data-mode="JP_ROMA">
+        日本語 → ローマ字
+      </li>
+      <li class="menu-item" data-mode="KR_JP_ROMA">
+        韓国語 → 日本語ローマ字
+      </li>
+      <li class="menu-item" data-mode="JP_KR">
+        日本語 → 韓国語
+      </li>
+      <li class="menu-item" data-mode="IMG_JP">
+        画像 → 日本語
+      </li>
+      <li class="menu-item" data-mode="IMG_KR">
+        画像 → 韓国語
+      </li>
+      <li class="menu-item" data-mode="WORD">
+        単語帳
+      </li>
     </ul>
+
     <p class="hint">↑↓ 移動 / Enter 決定</p>
+
+    <!-- デバッグ用：現在選択中 -->
+    <p id="debug-selected" style="text-align:center; opacity:0.6;">
+      selected: JP_ROMA
+    </p>
+
   </div>
 
-  <!-- DIFFICULTY -->
-  <div id="screen-difficulty" class="screen">
-    <h2>Difficulty</h2>
-    <ul class="menu" id="difficulty-list">
-      <li data-diff="HARD">HARD</li>
-      <li data-diff="NORMAL">NORMAL</li>
-      <li data-diff="EASY">EASY</li>
-    </ul>
-    <p class="hint">Enter 開始 / Esc 戻る</p>
-  </div>
-
-  <!-- WIP -->
-  <div id="screen-wip" class="screen">
-    <h2>準備中 (WIP)</h2>
-    <p class="hint">Escで戻る</p>
-  </div>
-
-  <!-- GAME -->
-  <div id="screen-game" class="screen">
-    <div class="game">
-      <div class="question">
-        <div id="q-main"></div>
-        <div id="q-sub"></div>
-      </div>
-      <div class="typing">
-        <span id="typed"></span><span id="remain"></span>
-      </div>
-      <div class="status">
-        <span id="status-q"></span>
-        <span id="status-miss"></span>
-      </div>
-    </div>
-  </div>
-
-  <!-- RESULT -->
-  <div id="screen-result" class="screen">
-    <h2>Result</h2>
-    <p id="result-kps"></p>
-    <p id="result-miss"></p>
-    <p class="hint">Enterでメニューへ</p>
-  </div>
 </div>
 
 <script src="main.js"></script>
