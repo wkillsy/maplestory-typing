@@ -30,4 +30,41 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+let selectedMode = "JP_ROMA"; // 初期値
+
+function updateMenu() {
+  menuItems.forEach((item, i) => {
+    item.classList.toggle("selected", i === menuIndex);
+  });
+  selectedMode = menuItems[menuIndex].dataset.mode;
+  debug.textContent = "selected: " + selectedMode;
+}
+
+document.addEventListener("keydown", (e) => {
+  if (!document.getElementById("screen-menu").classList.contains("active")) {
+    return;
+  }
+
+  if (e.key === "ArrowUp") {
+    menuIndex = (menuIndex - 1 + menuItems.length) % menuItems.length;
+    updateMenu();
+  }
+
+  if (e.key === "ArrowDown") {
+    menuIndex = (menuIndex + 1) % menuItems.length;
+    updateMenu();
+  }
+
+  if (e.key === "Enter") {
+    console.log("ENTER mode:", selectedMode);
+
+    if (selectedMode === "JP_ROMA" || selectedMode === "KR_JP_ROMA") {
+      showScreen("screen-difficulty");
+    } else {
+      showScreen("screen-wip");
+    }
+  }
+});
+
 updateMenu();
+
