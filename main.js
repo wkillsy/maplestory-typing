@@ -1,165 +1,246 @@
-/* ===== 状態 ===== */
+/* =====================
+   状態管理
+===================== */
 let state = "MENU";
-let selectedIndex = 0;
-let selectedMode = null;
-let selectedDifficulty = null;
+let selectIndex = 0;
+let mode = null;
+let difficulty = null;
 
 let dict = [];
 let gameData = [];
-
 let questions = [];
-let currentQ = 0;
+
+let romanCandidates = [];
+let charIndex = 0;
+let inputBuffer = "";
 let missCount = 0;
 let startTime = 0;
 
-/* ===== 定数 ===== */
-const MODES_WITH_GAME = ["JP_ROMA", "KR_JP_ROMA"];
-const DIFF_FILTER = {
+/* =====================
+   定数
+===================== */
+const GAME_MODES = ["JP_ROMA", "KR_JP_ROMA"];
+const DIFF_MAP = {
   EASY: [1],
   NORMAL: [1, 2],
   HARD: [1, 2, 3]
 };
 
-/* ===== JSON読込 ===== */
+/* =====================
+   JSON 読込
+===================== */
 Promise.all([
   fetch("data/romanTypingParseDictionary.json").then(r => r.json()),
   fetch("data/maple_typing_game_data.json").then(r => r.json())
 ]).then(([d, g]) => {
-  dict = d;
-  gameData = g;
+  dict = buildDict(d);
+  gameData = Object.values(g).flat();
 });
 
-/* ===== 画面切替 ===== */
-function showScreen(id) {
+/* =====================
+   辞書構築（最長一致）
+===================== */
+function buildDict(json) {
+  return json
+    .map(e => ({
+      pattern: Array.from(e.Pattern),
+      roman: e.TypePattern
+    }))
+    .sort((a, b) => b.pattern.length - a.pattern.length);
+}
+
+/* =====================
+   ひらがな → ローマ字候補列
+===================== */
+function buildRomanCandidates(hiraArr) {
+  const result = [];
+  let i = 0;
+
+  while (i < hiraArr.length) {
+    let matched = false;
+
+    for (const d of dict) {
+      const slice = hiraArr.slice(i, i + d.pattern.length);
+      if (
+        slice.length === d.pattern.length &&
+        slice.every((c, idx) => c === d.pattern[idx])
+      ) {
+        result.push([...d.roman]);
+        i += d.pattern.length;
+        matched = true;
+        break;
+      }
+    }
+
+    if (!matched) {
+      result.push([hiraArr[i]]);
+      i++;
+    }
+  }
+  return result;
+}
+
+/* =====================
+   画面制御
+===================== */
+function show(id) {
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
 }
 
-/* ===== メニュー制御 ===== */
-function updateMenu() {
-  document.querySelectorAll(".menu").forEach(menu => {
-    const items = menu.querySelectorAll("li");
-    items.forEach((li, i) => {
-      li.classList.toggle("selected", i === selectedIndex);
-    });
+function updateMenu(listId) {
+  document.querySelectorAll(`#${listId} li`).forEach((li, i) => {
+    li.classList.toggle("selected", i === selectIndex);
   });
 }
 
-/* ===== キー入力 ===== */
+/* =====================
+   キー入力
+===================== */
 document.addEventListener("keydown", e => {
-  if (state === "MENU") handleMenu(e);
-  else if (state === "DIFF") handleDiff(e);
-  else if (state === "GAME") handleGame(e);
-  else if (state === "RESULT") {
-    if (e.key === "Enter") {
-      state = "MENU";
-      selectedIndex = 0;
-      showScreen("screen-menu");
-      updateMenu();
-    }
+  if (state === "MENU") menuKey(e);
+  else if (state === "DIFF") diffKey(e);
+  else if (state === "GAME") gameKey(e);
+  else if (state === "RESULT" && e.key === "Enter") {
+    state = "MENU";
+    selectIndex = 0;
+    show("screen-menu");
+    updateMenu("menu-list");
   }
 });
 
-/* ===== メニュー処理 ===== */
-function handleMenu(e) {
-  const items = document.querySelectorAll("#screen-menu .menu li");
+/* =====================
+   MENU
+===================== */
+function menuKey(e) {
+  const items = document.querySelectorAll("#menu-list li");
 
-  if (e.key === "ArrowDown") selectedIndex = (selectedIndex + 1) % items.length;
-  if (e.key === "ArrowUp") selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+  if (e.key === "ArrowDown") selectIndex = (selectIndex + 1) % items.length;
+  if (e.key === "ArrowUp") selectIndex = (selectIndex - 1 + items.length) % items.length;
 
   if (e.key === "Enter") {
-    selectedMode = items[selectedIndex].dataset.mode;
-
-    if (MODES_WITH_GAME.includes(selectedMode)) {
+    mode = items[selectIndex].dataset.mode;
+    if (GAME_MODES.includes(mode)) {
       state = "DIFF";
-      selectedIndex = 0;
-      showScreen("screen-difficulty");
-    } else {
-      state = "WIP";
-      showScreen("screen-wip");
+      selectIndex = 0;
+      show("screen-difficulty");
+      updateMenu("difficulty-list");
+      return;
     }
+    state = "WIP";
+    show("screen-wip");
   }
-  updateMenu();
+  updateMenu("menu-list");
 }
 
-/* ===== 難易度処理 ===== */
-function handleDiff(e) {
-  const items = document.querySelectorAll("#screen-difficulty .menu li");
+/* =====================
+   DIFFICULTY
+===================== */
+function diffKey(e) {
+  const items = document.querySelectorAll("#difficulty-list li");
 
-  if (e.key === "ArrowDown") selectedIndex = (selectedIndex + 1) % items.length;
-  if (e.key === "ArrowUp") selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+  if (e.key === "ArrowDown") selectIndex = (selectIndex + 1) % items.length;
+  if (e.key === "ArrowUp") selectIndex = (selectIndex - 1 + items.length) % items.length;
 
   if (e.key === "Escape") {
     state = "MENU";
-    selectedIndex = 0;
-    showScreen("screen-menu");
+    selectIndex = 0;
+    show("screen-menu");
+    updateMenu("menu-list");
   }
 
   if (e.key === "Enter") {
-    selectedDifficulty = items[selectedIndex].dataset.diff;
+    difficulty = items[selectIndex].dataset.diff;
     startGame();
   }
-  updateMenu();
+  updateMenu("difficulty-list");
 }
 
-/* ===== ゲーム開始 ===== */
+/* =====================
+   GAME START
+===================== */
 function startGame() {
   state = "GAME";
-  showScreen("screen-game");
+  show("screen-game");
 
-  const diffs = DIFF_FILTER[selectedDifficulty];
-  const pool = gameData.filter(q => diffs.includes(q.difficulty));
+  const pool = gameData.filter(q =>
+    DIFF_MAP[difficulty].includes(q.difficulty)
+  );
 
   questions = pool.sort(() => Math.random() - 0.5).slice(0, 10);
-  currentQ = 0;
   missCount = 0;
   startTime = performance.now();
-
-  loadQuestion();
+  nextQuestion();
 }
 
-/* ===== 問題表示 ===== */
-function loadQuestion() {
-  const q = questions[currentQ];
-  document.getElementById("display-main").textContent = q.jp_display;
-  document.getElementById("display-sub").textContent = q.kr_display;
-  document.getElementById("typed").textContent = "";
-  document.getElementById("remain").textContent = q.jp_hiragana;
+/* =====================
+   QUESTION
+===================== */
+function nextQuestion() {
+  const q = questions.shift();
+
+  romanCandidates = buildRomanCandidates(q.jp_hiragana);
+  charIndex = 0;
+  inputBuffer = "";
+
+  document.getElementById("q-main").textContent = q.jp_display;
+  document.getElementById("q-sub").textContent = q.kr_display;
+  updateTyping();
 }
 
-/* ===== 入力処理（仮：ローマ字処理は後で接続） ===== */
-function handleGame(e) {
+/* =====================
+   TYPING
+===================== */
+function gameKey(e) {
   if (e.key.length !== 1) return;
 
-  const remain = document.getElementById("remain");
-  if (e.key === remain.textContent[0]) {
-    document.getElementById("typed").textContent += e.key;
-    remain.textContent = remain.textContent.slice(1);
+  inputBuffer += e.key;
+  const list = romanCandidates[charIndex];
+  const matched = list.filter(r => r.startsWith(inputBuffer));
 
-    if (remain.textContent.length === 0) {
-      currentQ++;
-      if (currentQ >= questions.length) endGame();
-      else loadQuestion();
-    }
-  } else {
+  if (matched.length === 0) {
     missCount++;
+    inputBuffer = inputBuffer.slice(0, -1);
+    return;
   }
+
+  romanCandidates[charIndex] = matched;
+
+  if (matched.includes(inputBuffer)) {
+    charIndex++;
+    inputBuffer = "";
+    if (charIndex >= romanCandidates.length) {
+      if (questions.length === 0) return endGame();
+      nextQuestion();
+    }
+  }
+  updateTyping();
 }
 
-/* ===== 終了 ===== */
+function updateTyping() {
+  const typed = romanCandidates.slice(0, charIndex).map(c => c[0]).join("");
+  const remain = romanCandidates.slice(charIndex).map(c => c[0]).join("");
+
+  document.getElementById("typed").textContent = typed + inputBuffer;
+  document.getElementById("remain").textContent = remain.slice(inputBuffer.length);
+  document.getElementById("status-miss").textContent = `Miss: ${missCount}`;
+}
+
+/* =====================
+   RESULT
+===================== */
 function endGame() {
   state = "RESULT";
-  showScreen("screen-result");
+  show("screen-result");
 
   const time = (performance.now() - startTime) / 1000;
-  const totalKeys = questions.reduce((a, q) => a + q.jp_hiragana.length, 0);
+  const keys = document.getElementById("typed").textContent.length;
 
   document.getElementById("result-kps").textContent =
-    `Key/sec: ${(totalKeys / time).toFixed(2)}`;
+    `Key/sec: ${(keys / time).toFixed(2)}`;
   document.getElementById("result-miss").textContent =
     `Miss: ${missCount}`;
 }
 
-/* 初期表示 */
-showScreen("screen-menu");
-updateMenu();
+/* 初期 */
+updateMenu("menu-list");
