@@ -1,30 +1,71 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Maple Typing Game</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div id="game">
-  <h1>Maple Typing Game</h1>
-
-  <div id="mode">
-    <button data-mode="kr">KR → JP</button>
-    <button data-mode="jp">JP → JP</button>
+<div id="app">
+  <!-- ===== メニュー画面 ===== -->
+  <div id="screen-menu" class="screen active">
+    <h1>Typing Game</h1>
+    <ul class="menu">
+      <li data-mode="JP_ROMA">日本語 → ローマ字</li>
+      <li data-mode="KR_JP_ROMA">韓国語 → 日本語ローマ字</li>
+      <li data-mode="JP_KR">日本語 → 韓国語</li>
+      <li data-mode="IMG_JP">画像 → 日本語</li>
+      <li data-mode="IMG_KR">画像 → 韓国語</li>
+      <li data-mode="WORD">単語帳</li>
+    </ul>
+    <p class="hint">↑↓で選択 / Enterで決定</p>
   </div>
 
-  <div id="question"></div>
-  <div id="answer"></div>
-
-  <div id="typing">
-    <span id="typed"></span><span id="remain"></span>
+  <!-- ===== 難易度選択 ===== -->
+  <div id="screen-difficulty" class="screen">
+    <h2>Difficulty</h2>
+    <ul class="menu">
+      <li data-diff="HARD">HARD</li>
+      <li data-diff="NORMAL">NORMAL</li>
+      <li data-diff="EASY">EASY</li>
+    </ul>
+    <p class="hint">Enterで開始 / Escで戻る</p>
   </div>
 
-  <div id="log"></div>
+  <!-- ===== WIP ===== -->
+  <div id="screen-wip" class="screen">
+    <h2>準備中 (WIP)</h2>
+    <p>このモードは現在開発中です</p>
+    <p class="hint">Escで戻る</p>
+  </div>
+
+  <!-- ===== ゲーム画面 ===== -->
+  <div id="screen-game" class="screen">
+    <div class="game-area">
+      <div class="question">
+        <div id="display-main"></div>
+        <div id="display-sub"></div>
+      </div>
+      <div class="input">
+        <span id="typed"></span><span id="remain"></span>
+      </div>
+      <div class="status">
+        <span id="q-count"></span>
+        <span id="miss-count"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== リザルト ===== -->
+  <div id="screen-result" class="screen">
+    <h2>Result</h2>
+    <p id="result-kps"></p>
+    <p id="result-miss"></p>
+    <p class="hint">Enterでメニューへ</p>
+  </div>
 </div>
 
-<script src="game.js"></script>
+<script src="main.js"></script>
 </body>
 </html>
