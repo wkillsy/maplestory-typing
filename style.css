@@ -1,0 +1,93 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #111;
+  color: #fff;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* 16:9 固定 */
+#app {
+  width: 1280px;
+  height: 720px;
+  background: #222;
+  position: relative;
+  overflow: hidden;
+}
+
+.screen {
+  display: none;
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+}
+
+.screen.active {
+  display: block;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 40px auto;
+  width: 400px;
+}
+
+.menu li {
+  padding: 12px;
+  margin: 8px 0;
+  background: #333;
+  text-align: center;
+  cursor: pointer;
+}
+
+.menu li.selected {
+  background: #0af;
+}
+
+.hint {
+  text-align: center;
+  opacity: 0.7;
+}
+
+/* ゲーム画面 */
+.game-area {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.question {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.input {
+  font-size: 32px;
+}
+
+#typed {
+  color: #0af;
+}
+
+#remain {
+  color: #777;
+}
+
+.status {
+  margin-top: 20px;
+  font-size: 18px;
+}
