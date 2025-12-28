@@ -1,3 +1,6 @@
+/* =====================
+   Reset / Base
+===================== */
 * {
   box-sizing: border-box;
 }
@@ -6,22 +9,31 @@ body {
   margin: 0;
   background: #111;
   color: #fff;
-  font-family: system-ui, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
 
+/* =====================
+   App Frame (16:9)
+===================== */
 #app {
   width: 1280px;
   height: 720px;
-  background: #222;
+  background: #1e1e1e;
   padding: 40px;
+  position: relative;
 }
 
+/* =====================
+   Screen Control
+===================== */
 .screen {
   display: none;
+  width: 100%;
   height: 100%;
 }
 
@@ -29,38 +41,69 @@ body {
   display: block;
 }
 
-h1, h2 {
+/* =====================
+   Headings
+===================== */
+h1 {
   text-align: center;
+  font-size: 48px;
+  margin: 0;
 }
 
+/* =====================
+   Menu
+===================== */
 .menu {
   list-style: none;
   padding: 0;
-  margin: 40px auto;
-  width: 400px;
+  margin: 60px auto;
+  width: 420px;
 }
 
-.menu li {
-  padding: 14px;
-  margin: 8px 0;
-  background: #333;
+.menu-item {
+  background: #2f2f2f;
+  margin: 10px 0;
+  padding: 16px;
   text-align: center;
+  font-size: 20px;
+  border-radius: 6px;
+  transition: background 0.15s ease, transform 0.1s ease;
 }
 
-.menu li.selected {
-  background: #0af;
+/* hover（マウス操作対応用） */
+.menu-item:hover {
+  background: #3a3a3a;
 }
 
+/* 選択中 */
+.menu-item.selected {
+  background: #0a84ff;
+  color: #fff;
+  transform: scale(1.03);
+}
+
+/* =====================
+   Hint / Debug
+===================== */
 .hint {
   text-align: center;
   opacity: 0.7;
+  font-size: 14px;
 }
 
+#debug-selected {
+  margin-top: 12px;
+  font-size: 13px;
+}
+
+/* =====================
+   (今後用) Game Screen
+===================== */
 .game {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100%;
 }
 
@@ -70,24 +113,19 @@ h1, h2 {
   text-align: center;
 }
 
-#q-sub {
-  font-size: 28px;
-  opacity: 0.7;
-}
-
 .typing {
   font-size: 32px;
 }
 
 #typed {
-  color: #0af;
+  color: #0a84ff;
 }
 
 #remain {
-  color: #777;
+  color: #888;
 }
 
 .status {
   margin-top: 20px;
-  font-size: 18px;
+  font-size: 16px;
 }
