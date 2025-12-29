@@ -1,131 +1,144 @@
-/* =====================
-   Reset / Base
-===================== */
-* {
-  box-sizing: border-box;
-}
-
+/* リセットと基本設定 */
+* { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
 body {
-  margin: 0;
-  background: #111;
-  color: #fff;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+    background-color: #222;
+    color: #fff;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-/* =====================
-   App Frame (16:9)
-===================== */
+/* 画面中央固定 16:9コンテナ */
 #app {
-  width: 1280px;
-  height: 720px;
-  background: #1e1e1e;
-  padding: 40px;
-  position: relative;
+    position: relative;
+    width: 100%;
+    max-width: 1920px;
+    aspect-ratio: 16 / 9;
+    background: url('image/background01.png') no-repeat center center;
+    background-size: cover;
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    overflow: hidden;
 }
 
-/* =====================
-   Screen Control
-===================== */
+/* 共通ユーティリティ */
+.hidden { display: none !important; }
 .screen {
-  display: none;
-  width: 100%;
-  height: 100%;
+    width: 100%; height: 100%;
+    position: absolute; top: 0; left: 0;
+    background: rgba(0, 0, 0, 0.6); /* 背景を暗く */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
 }
 
-.screen.active {
-  display: block;
+/* メニュー画面 */
+.menu-grid { display: flex; gap: 4rem; margin-bottom: 2rem; }
+.menu-col { display: flex; flex-direction: column; gap: 1rem; }
+.menu-btn {
+    width: 300px; padding: 1.5rem;
+    background: rgba(255, 165, 0, 0.8);
+    border: 2px solid #fff;
+    color: #fff; cursor: pointer;
+    transition: transform 0.1s;
+}
+.menu-btn:hover { transform: scale(1.05); background: rgba(255, 165, 0, 1); }
+.menu-btn.secondary { background: #666; width: 200px; }
+.main-text { font-size: 1.5rem; font-weight: bold; display: block; }
+.sub-text { font-size: 0.9rem; opacity: 0.8; }
+
+/* 難易度選択 */
+.difficulty-buttons { display: flex; gap: 2rem; margin-top: 2rem; }
+.diff-btn {
+    width: 150px; height: 150px; border-radius: 50%;
+    border: none; font-size: 1.5rem; font-weight: bold; cursor: pointer;
+    color: #fff;
+}
+.diff-btn.easy { background: #4caf50; }
+.diff-btn.normal { background: #2196f3; }
+.diff-btn.hard { background: #f44336; }
+
+/* ゲーム画面 */
+#screen-game { justify-content: flex-start; padding-top: 1rem; }
+.game-hud {
+    width: 90%; display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 2rem;
+}
+.hp-container { width: 60%; position: relative; }
+.hp-bar-bg { width: 100%; height: 30px; background: #333; border: 2px solid #fff; }
+.hp-bar-fill { width: 100%; height: 100%; background: #e91e63; transition: width 0.2s; }
+#enemy-hp-text { position: absolute; top: -25px; left: 0; font-weight: bold; }
+.timer-container { font-size: 2rem; font-family: monospace; }
+
+.game-field {
+    width: 100%; flex-grow: 1; display: flex;
+    justify-content: center; align-items: center; position: relative;
 }
 
-/* =====================
-   Headings
-===================== */
-h1 {
-  text-align: center;
-  font-size: 48px;
-  margin: 0;
+/* 敵とダメージ演出 */
+.enemy-area { position: absolute; left: 15%; top: 50%; transform: translateY(-50%); }
+#enemy-img { width: 200px; height: auto; transition: transform 0.1s; }
+.enemy-hit { transform: translateY(-50%) scale(0.95); filter: brightness(2) sepia(1) hue-rotate(-50deg) saturate(5); } /* 被弾時の赤フラッシュ */
+
+#damage-container { position: absolute; top: -50px; left: 50%; width: 200px; height: 200px; pointer-events: none; }
+.damage-number {
+    position: absolute; font-size: 2rem; font-weight: bold;
+    color: #ffeb3b; text-shadow: 2px 2px 0 #f00;
+    animation: floatUp 0.8s ease-out forwards;
+}
+@keyframes floatUp {
+    0% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-50px) scale(1.5); }
 }
 
-/* =====================
-   Menu
-===================== */
-.menu {
-  list-style: none;
-  padding: 0;
-  margin: 60px auto;
-  width: 420px;
+/* タイピングエリア */
+.typing-area {
+    background: rgba(0,0,0,0.7);
+    padding: 2rem; border-radius: 10px; border: 2px solid #aaa;
+    text-align: center; min-width: 600px; z-index: 10;
+}
+.display-text { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.reading-text { font-size: 1.5rem; color: #ccc; margin-bottom: 1rem; min-height: 1.5rem; }
+#game-input {
+    width: 100%; font-size: 2rem; padding: 0.5rem;
+    text-align: center; background: rgba(255,255,255,0.1);
+    color: #fff; border: none; outline: none; border-bottom: 2px solid #fff;
+}
+/* 練習モード用オーバーレイ */
+.input-wrapper { position: relative; }
+.input-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    font-size: 2rem; color: rgba(255,255,255,0.3); pointer-events: none;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0.5rem;
 }
 
-.menu-item {
-  background: #2f2f2f;
-  margin: 10px 0;
-  padding: 16px;
-  text-align: center;
-  font-size: 20px;
-  border-radius: 6px;
-  transition: background 0.15s ease, transform 0.1s ease;
+.combo-area {
+    position: absolute; right: 5%; bottom: 10%;
+    font-size: 3rem; font-style: italic; color: #00bcd4;
+    text-shadow: 0 0 10px #00bcd4;
 }
 
-/* hover（マウス操作対応用） */
-.menu-item:hover {
-  background: #3a3a3a;
+/* 音量スライダー */
+#volume-control {
+    position: absolute; top: 10px; right: 10px; z-index: 1000;
+    background: rgba(0,0,0,0.5); padding: 5px 10px; border-radius: 20px;
+    display: flex; align-items: center; gap: 10px; font-size: 0.8rem;
 }
 
-/* 選択中 */
-.menu-item.selected {
-  background: #0a84ff;
-  color: #fff;
-  transform: scale(1.03);
-}
-
-/* =====================
-   Hint / Debug
-===================== */
-.hint {
-  text-align: center;
-  opacity: 0.7;
-  font-size: 14px;
-}
-
-#debug-selected {
-  margin-top: 12px;
-  font-size: 13px;
-}
-
-/* =====================
-   (今後用) Game Screen
-===================== */
-.game {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
-.question {
-  font-size: 48px;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.typing {
-  font-size: 32px;
-}
-
-#typed {
-  color: #0a84ff;
-}
-
-#remain {
-  color: #888;
-}
-
-.status {
-  margin-top: 20px;
-  font-size: 16px;
+/* スマホ対応 (縦画面) */
+@media (max-width: 768px) {
+    #app { aspect-ratio: auto; height: 100vh; background-position: center top; }
+    .menu-grid { flex-direction: column; gap: 1rem; }
+    .enemy-area { position: relative; left: auto; top: auto; transform: none; margin-bottom: 1rem; }
+    .game-field { flex-direction: column; }
+    .typing-area { min-width: 90%; width: 90%; }
+    .hp-bar-bg { height: 15px; }
+    .diff-btn { width: 80px; height: 80px; font-size: 1rem; }
+    /* スマホキーボード用のスペース確保 */
+    .game-field { justify-content: flex-start; padding-top: 2rem; }
 }
