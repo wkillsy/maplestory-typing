@@ -1,4 +1,6 @@
-/* 基本リセット */
+/* =========================================
+   1. 基本リセット & 16:9 コンテナ
+   ========================================= */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -15,7 +17,6 @@ body {
     overflow: hidden;
 }
 
-/* 16:9 容器 */
 #game-viewport {
     position: relative;
     width: 90vw;
@@ -26,7 +27,9 @@ body {
     overflow: hidden;
 }
 
-/* 各画面の切り替え */
+/* =========================================
+   2. 画面切り替え & 背景レイヤー
+   ========================================= */
 .screen {
     display: none;
     width: 100%;
@@ -38,124 +41,243 @@ body {
     justify-content: center;
     align-items: center;
     color: white;
-    background: rgba(0,0,0,0.5); /* 背景を少し暗く */
 }
 
     .screen.active {
         display: flex;
     }
 
-/* タイピング表示 (寿司打スタイル) */
-#typing-box {
-    background: rgba(0, 0, 0, 0.7);
-    padding: 30px;
-    border-radius: 15px;
-    text-align: center;
-    width: 80%;
-    margin: 20px 0;
+/* 背景画像の設定 */
+#screen-menu, #screen-difficulty {
+    background: url('image/background01.png') no-repeat center center;
+    background-size: cover;
 }
 
-#display-word {
-    font-size: 3.5rem;
-    font-weight: bold;
-    margin-bottom: 10px;
+#screen-ready, #screen-game {
+    background: url('image/background02.png') no-repeat center center;
+    background-size: cover;
 }
 
-#kana-guide {
-    font-size: 2rem;
-    font-family: 'Consolas', monospace;
-    font-weight: bold;
+#screen-result {
+    background: url('image/background03.png') no-repeat center center;
+    background-size: cover;
 }
 
-.char-typed {
-    color: #ffd700;
-    text-shadow: 0 0 5px #ffd700;
+    /* 暗幕(オーバーレイ)設定 
+   ★pointer-events: none; によりクリックが素通りするよう修正 */
+    #screen-menu::before, #screen-difficulty::before,
+    #screen-ready::before, #screen-game::before,
+    #screen-result::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+#screen-menu::before, #screen-difficulty::before {
+    background: rgba(0, 0, 0, 0.2);
 }
 
-.char-not-typed {
-    color: #557799;
+#screen-ready::before, #screen-game::before {
+    background: rgba(0, 0, 0, 0.5);
 }
 
-/* HPバー */
-#enemy-hp-bar {
-    width: 60%;
-    height: 30px;
-    background: #444;
-    border: 2px solid #fff;
+#screen-result::before {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* コンテンツを手前に出す設定（一括管理） */
+.menu-layout, .difficulty-buttons, h2,
+.input-method-select, .extra-settings,
+.ready-content, #enemy-container, #typing-box, #game-info,
+.result-stats, .result-actions, #ranking-container {
     position: relative;
-    margin-bottom: 10px;
+    z-index: 10;
+}
+
+/* =========================================
+   3. HPバー (リッチなメイプル風)
+   ========================================= */
+#enemy-hp-bar {
+    width: 90%;
+    max-width: 1000px;
+    height: 34px;
+    background: #331111;
+    position: relative;
+    margin: 10px auto 20px;
+    border: 3px solid #222;
+    border-top-color: #666;
+    border-left-color: #666;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5), inset 0 0 10px rgba(0,0,0,0.8);
+    overflow: hidden;
 }
 
 #hp-fill {
     width: 100%;
     height: 100%;
-    background: red;
-    transition: width 0.1s;
+    background: linear-gradient(to bottom, #ff6666 0%, #dd0000 50%, #aa0000 100%);
+    box-shadow: inset 0 2px 2px rgba(255,255,255,0.4);
+    transition: width 0.3s ease-out;
 }
 
 #hp-text {
     position: absolute;
     width: 100%;
-    text-align: center;
-    top: 3px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
     font-weight: bold;
-    font-size: 14px;
-    text-shadow: 1px 1px 2px #000;
+    font-size: 18px;
+    font-family: 'Arial Black', sans-serif;
+    text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+    z-index: 2;
 }
 
-/* 敵画像 */
-#enemy-img {
-    height: 120px;
+/* =========================================
+   4. タイピング・ combat 演出
+   ========================================= */
+#typing-box {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    width: 80%;
+    margin: 10px 0;
 }
 
-/* ダメージ演出 */
+#display-word {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#kana-guide {
+    font-size: 1.8rem;
+    font-family: 'Consolas', monospace;
+    font-weight: bold;
+    min-height: 2.5rem;
+}
+
+.char-typed {
+    color: #ffd700;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
+    opacity: 1 !important;
+}
+
+.practice-off .char-not-typed {
+    color: transparent;
+}
+
+.practice-on .char-not-typed {
+    color: #556677;
+}
+
 .damage-num {
     position: absolute;
+    top: 15%;
     color: #ffff00;
     font-size: 2.5rem;
     font-weight: bold;
-    text-shadow: 2px 2px 0 #000;
-    animation: damageRise 0.8s ease-out forwards;
+    font-family: 'Arial Black', sans-serif;
+    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000;
     pointer-events: none;
+    z-index: 100;
+    animation: damageRise 1.0s ease-out forwards;
 }
 
 @keyframes damageRise {
     0% {
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
         opacity: 1;
     }
 
+    20% {
+        transform: translateY(-20px) scale(1.2);
+    }
+
     100% {
-        transform: translateY(-80px);
+        transform: translateY(-120px) scale(1);
         opacity: 0;
     }
 }
 
-/* フィニッシュバナー */
+/* =========================================
+   フィニッシュバナー (演出の復元と修正)
+   ========================================= */
 #finish-banner {
-    position: fixed;
+    /* position: fixed から absolute に変更（ゲーム画面の中央を基準にするため） */
+    position: absolute;
     top: 50%;
     left: 50%;
+    /* translate で自分自身のサイズの半分だけ戻すことで、完全な中央揃えを実現 */
     transform: translate(-50%, -50%);
-    font-size: 6rem;
+    font-size: 8rem; /* 迫力を出すため少し大きく */
     color: #ff0000;
     font-weight: bold;
-    text-shadow: 4px 4px 0 #fff;
-    z-index: 1000;
-    animation: zoomIn 0.5s ease-out;
+    text-shadow: 4px 4px 0 #fff, -4px -4px 0 #fff, 4px -4px 0 #fff, -4px 4px 0 #fff, 0 8px 15px rgba(0,0,0,0.5);
+    z-index: 2000; /* 全ての要素（ランキング等）よりも最前面に */
+    white-space: nowrap; /* 文字が途中で折れ曲がって画面外に行くのを防ぐ */
+    pointer-events: none; /* バナーがクリックを邪魔しないように */
+
+    animation: zoomInBanner 0.5s ease-out forwards;
 }
 
-@keyframes zoomIn {
+@keyframes zoomInBanner {
     0% {
         transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+
+    70% {
+        transform: translate(-50%, -50%) scale(1.2); /* 少し大きくしてから戻す「バウンド感」 */
+        opacity: 1;
     }
 
     100% {
         transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
     }
 }
 
-/* 入力欄の隠蔽 */
+/* スマホ時などのサイズ調整 */
+@media (max-width: 768px) {
+    #finish-banner {
+        font-size: 4rem;
+    }
+}
+
+/* =========================================
+   5. メイプル風ボタン & UI
+   ========================================= */
+button {
+    padding: 10px 25px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    margin: 5px;
+    background: linear-gradient(to bottom, #ffdb6e, #ffa500);
+    border: 2px solid #6b4a00;
+    color: #4b3200;
+    font-weight: bold;
+    box-shadow: 0 4px 0 #8b5a00;
+    transition: 0.1s;
+}
+
+    button:hover {
+        filter: brightness(1.1);
+    }
+
+    button:active {
+        transform: translateY(3px);
+        box-shadow: 0 1px 0 #8b5a00;
+    }
+
 #type-input {
     position: absolute;
     top: -100px;
@@ -163,38 +285,99 @@ body {
     pointer-events: none;
 }
 
-/* その他UI */
 #volume-control {
     position: absolute;
     top: 10px;
     right: 10px;
-    color: white;
     z-index: 100;
+    color: white;
 }
 
-.blink {
-    animation: blinkAnim 1s infinite;
+/* =========================================
+   6. ランキング (メイプル風ウィンドウ)
+   ========================================= */
+#ranking-container {
+    margin-top: 15px;
+    width: 95%;
+    max-width: 800px;
+    background: rgba(255, 245, 215, 0.95);
+    border: 3px solid #6b4a00;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+    color: #4b3200;
+    max-height: 250px; /* 16:9内に収めるため制限 */
+    overflow-y: auto;
 }
 
-@keyframes blinkAnim {
-    0%, 100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.3;
-    }
-}
-
-button {
-    padding: 10px 20px;
+#ranking-title {
+    text-align: center;
+    background: linear-gradient(to bottom, #ffdb6e, #ffa500);
+    margin: -10px -10px 10px -10px;
+    padding: 8px;
+    border-bottom: 3px solid #6b4a00;
+    border-radius: 9px 9px 0 0;
     font-size: 1.2rem;
-    cursor: pointer;
-    border-radius: 5px;
-    margin: 5px;
+    color: #6b4a00;
 }
 
-/* スマホ対応（縦画面） */
+#ranking-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    #ranking-table th {
+        background: #e6d4a8;
+        padding: 8px;
+        border-bottom: 2px solid #6b4a00;
+        font-weight: bold;
+    }
+
+    #ranking-table td {
+        padding: 6px;
+        text-align: center;
+        border-bottom: 1px solid #d4c49a;
+    }
+
+    #ranking-table tbody tr:nth-child(even) {
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* 順位別の色 */
+    #ranking-table tbody tr:nth-child(1) td:first-child {
+        color: #d4af37;
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    #ranking-table tbody tr:nth-child(2) td:first-child {
+        color: #aaa9ad;
+        font-weight: bold;
+    }
+
+    #ranking-table tbody tr:nth-child(3) td:first-child {
+        color: #b08d57;
+        font-weight: bold;
+    }
+
+/* カスタムスクロールバー */
+#ranking-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+#ranking-container::-webkit-scrollbar-track {
+    background: #e6d4a8;
+    border-radius: 4px;
+}
+
+#ranking-container::-webkit-scrollbar-thumb {
+    background: #6b4a00;
+    border-radius: 4px;
+}
+
+/* =========================================
+   7. スマホ・レスポンシブ
+   ========================================= */
 @media (max-aspect-ratio: 1/1) {
     #game-viewport {
         width: 95vw;
@@ -202,10 +385,14 @@ button {
     }
 
     #display-word {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
 
     #kana-guide {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
+    }
+
+    #ranking-container {
+        max-height: 200px;
     }
 }
