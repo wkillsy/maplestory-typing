@@ -47,10 +47,10 @@
             </div>
         </section>
 
-        <section id="screen-ready" class="screen">
+        <section id="screen-ready" class="screen" onclick="handleStartTap()">
             <div class="ready-content">
                 <h2 id="ready-diff-display">Difficulty: Normal</h2>
-                <p class="blink">Press [ Enter ] to Start!</p>
+                <p class="blink">Tap or Press [ Enter ] to Start!</p>
                 <p class="sub-text">(ESC to go back)</p>
             </div>
         </section>
@@ -62,7 +62,7 @@
                     <span id="hp-text">1000 / 1000</span>
                 </div>
                 <div id="enemy-sprite">
-                    <img src="image/enemy01.png" alt="enemy" id="enemy-img">
+                    <img src="" alt="enemy" id="enemy-img">
                 </div>
             </div>
 
@@ -76,7 +76,7 @@
                 <div id="time-display">Time: 00.00</div>
             </div>
 
-            <input type="text" id="type-input" autocomplete="off">
+            <input type="text" id="type-input" autocomplete="off" inputmode="search">
         </section>
 
         <section id="screen-result" class="screen">
