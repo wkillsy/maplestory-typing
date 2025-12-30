@@ -100,7 +100,7 @@ body {
 }
 
 /* =========================================
-   3. HPバー (リッチなメイプル風)
+   3. HPバー & エネミー
    ========================================= */
 #enemy-hp-bar {
     width: 90%;
@@ -137,6 +137,35 @@ body {
     font-family: 'Arial Black', sans-serif;
     text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
     z-index: 2;
+}
+
+#enemy-sprite {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+#enemy-img {
+    max-width: 90%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    image-rendering: pixelated;
+    animation: floating 2s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 /* =========================================
@@ -207,24 +236,19 @@ body {
     }
 }
 
-/* =========================================
-   フィニッシュバナー (演出の復元と修正)
-   ========================================= */
+/* フィニッシュバナー */
 #finish-banner {
-    /* position: fixed から absolute に変更（ゲーム画面の中央を基準にするため） */
     position: absolute;
     top: 50%;
     left: 50%;
-    /* translate で自分自身のサイズの半分だけ戻すことで、完全な中央揃えを実現 */
     transform: translate(-50%, -50%);
-    font-size: 8rem; /* 迫力を出すため少し大きく */
+    font-size: 8rem;
     color: #ff0000;
     font-weight: bold;
     text-shadow: 4px 4px 0 #fff, -4px -4px 0 #fff, 4px -4px 0 #fff, -4px 4px 0 #fff, 0 8px 15px rgba(0,0,0,0.5);
-    z-index: 2000; /* 全ての要素（ランキング等）よりも最前面に */
-    white-space: nowrap; /* 文字が途中で折れ曲がって画面外に行くのを防ぐ */
-    pointer-events: none; /* バナーがクリックを邪魔しないように */
-
+    z-index: 2000;
+    white-space: nowrap;
+    pointer-events: none;
     animation: zoomInBanner 0.5s ease-out forwards;
 }
 
@@ -235,20 +259,13 @@ body {
     }
 
     70% {
-        transform: translate(-50%, -50%) scale(1.2); /* 少し大きくしてから戻す「バウンド感」 */
+        transform: translate(-50%, -50%) scale(1.2);
         opacity: 1;
     }
 
     100% {
         transform: translate(-50%, -50%) scale(1);
         opacity: 1;
-    }
-}
-
-/* スマホ時などのサイズ調整 */
-@media (max-width: 768px) {
-    #finish-banner {
-        font-size: 4rem;
     }
 }
 
@@ -278,10 +295,14 @@ button {
         box-shadow: 0 1px 0 #8b5a00;
     }
 
+/* スマホ対応：入力欄を画面外に置くが、完全に消さない */
 #type-input {
     position: absolute;
-    top: -100px;
     opacity: 0;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 1px;
     pointer-events: none;
 }
 
@@ -294,7 +315,7 @@ button {
 }
 
 /* =========================================
-   6. ランキング (メイプル風ウィンドウ)
+   6. ランキング
    ========================================= */
 #ranking-container {
     margin-top: 15px;
@@ -306,7 +327,7 @@ button {
     padding: 10px;
     box-shadow: 0 8px 16px rgba(0,0,0,0.5);
     color: #4b3200;
-    max-height: 250px; /* 16:9内に収めるため制限 */
+    max-height: 250px;
     overflow-y: auto;
 }
 
@@ -376,7 +397,7 @@ button {
 }
 
 /* =========================================
-   7. スマホ・レスポンシブ
+   7. スマホ・レスポンシブ (メディアクエリ)
    ========================================= */
 @media (max-aspect-ratio: 1/1) {
     #game-viewport {
@@ -393,6 +414,33 @@ button {
     }
 
     #ranking-container {
-        max-height: 200px;
+        max-height: 180px;
+    }
+
+    #finish-banner {
+        font-size: 4rem;
+    }
+}
+
+/* スマホ・タブレット（キーボード重なり防止） */
+@media (max-width: 768px) {
+    #enemy-container {
+        transform: scale(0.85);
+        margin-top: -10px;
+    }
+
+    #typing-box {
+        margin-top: -30px;
+        width: 95%;
+        padding: 15px;
+    }
+
+    #game-info {
+        position: absolute;
+        top: 5px;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        font-size: 0.9rem;
     }
 }
