@@ -262,5 +262,5 @@ function showRankingRegistration() {
 
 function postToX() {
     const text = `メイプルタイピング[${currentDifficulty}]で${score.damage}ダメージ与えました！討伐時間: ${finishTimeValue}秒 #MapleTyping https://wkillsy.github.io/maplestory-typing/`;
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`);
+    window.open(`https://x.com/intent/tweet?text=${encodeURIComponent(text)}`);
 }
