@@ -1,5 +1,5 @@
 /**
- * Maple Typing Game - main.js
+ * Maple Typing Game - main.js 
  */
 
 const SCREENS = {
