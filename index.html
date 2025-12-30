@@ -17,15 +17,15 @@
         <section id="screen-menu" class="screen active">
             <div class="menu-layout">
                 <div class="menu-left">
-                    <button onclick="selectMode('1-1')">日本語表示 → 日本語入力</button>
-                    <button onclick="selectMode('1-2')">韓国語表示 → 日本語入力（準）</button>
+                    <button onclick="selectMode('日→日')">日本語表示 → 日本語入力</button>
+                    <button onclick="selectMode('韓→日')">韓国語表示 → 日本語入力</button>
                 </div>
                 <div class="menu-right">
-                    <button onclick="selectMode('1-3')">韓国語表示 → 韓国語入力（準）</button>
-                    <button onclick="selectMode('1-4')">日本語表示 → 韓国語入力（準）</button>
+                    <button onclick="selectMode('韓→韓')">韓国語表示 → 韓国語入力（準備中）</button>
+                    <button onclick="selectMode('日→韓')">日本語表示 → 韓国語入力（準備中）</button>
                 </div>
                 <div class="menu-bottom">
-                    <button onclick="selectMode('1-5')" class="btn-vocab">単語帳モード (Coming Soon)</button>
+                    <button onclick="selectMode('単語帳')" class="btn-vocab">単語帳モード (Coming Soon)</button>
                 </div>
             </div>
         </section>
@@ -34,7 +34,7 @@
             <h2>難易度選択</h2>
             <div class="input-method-select">
                 <label><input type="radio" name="input-method" value="romaji" checked> ローマ字入力</label>
-                <label id="kana-option"><input type="radio" name="input-method" value="kana"> かな入力</label>
+                <label id="kana-option"><input type="radio" name="input-method" value="kana"> かな入力(準備中)</label>
             </div>
             <div class="difficulty-buttons">
                 <button onclick="initReady('Easy')">Easy</button>
@@ -84,13 +84,33 @@
             <div class="result-stats">
                 <p>討伐時間: <span id="res-time">0.00</span>s</p>
                 <p>ダメージ: <span id="res-damage">0</span></p>
+                <p>平均打鍵数: <span id="res-kps">0.0</span> key/s</p>
                 <p>打鍵数: <span id="res-keys">0</span></p>
                 <p>ミス数: <span id="res-miss">0</span></p>
             </div>
+
             <div class="result-actions">
                 <button onclick="showRankingRegistration()">ランキング登録</button>
                 <button onclick="postToX()">Xでポスト</button>
                 <button onclick="toTitle()">タイトルへ(F5)</button>
+                <button onclick="initReady(currentDifficulty)">再プレイ(ESC)</button>
+            </div>
+
+            <div id="ranking-container">
+                <h3 id="ranking-title">Global Ranking</h3>
+                <table id="ranking-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Time</th>
+                            <th>Damage</th>
+                            <th>KPS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ranking-body">
+                    </tbody>
+                </table>
             </div>
         </section>
     </div>
