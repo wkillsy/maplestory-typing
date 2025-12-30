@@ -178,7 +178,7 @@
         "く"
       ],
       "kr_display": "불독",
-      "difficulty": 1
+      "difficulty": 2
     },
     {
       "id": 15,
@@ -191,7 +191,7 @@
         "い"
       ],
       "kr_display": "썬콜",
-      "difficulty": 1
+      "difficulty": 2
     },
     {
       "id": 16,
@@ -324,7 +324,7 @@
         "ー"
       ],
       "kr_display": "신궁",
-      "difficulty": 1
+      "difficulty": 3
     },
     {
       "id": 26,
@@ -501,7 +501,7 @@
         "げ"
       ],
       "kr_display": "호영",
-      "difficulty": 1
+      "difficulty": 2
     },
     {
       "id": 39,
@@ -603,7 +603,7 @@
         "え"
       ],
       "kr_display": "은월",
-      "difficulty": 1
+      "difficulty": 2
     },
     {
       "id": 47,
@@ -704,12 +704,16 @@
     },
     {
       "id": 6,
-      "jp_display": "ビシャス",
+      "jp_display": "ビシャスプラント",
       "jp_hiragana": [
         "び",
         "し",
         "ゃ",
-        "す"
+        "す",
+        "ぷ",
+        "ら",
+        "ん",
+        "と"
       ],
       "kr_display": "파풀라투스",
       "difficulty": 3
