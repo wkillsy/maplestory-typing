@@ -8,126 +8,89 @@
 </head>
 <body>
 
-    <div id="app">
+    <div id="game-viewport">
         <div id="volume-control">
-            <span>BGM/SE</span>
+            <span>Vol</span>
             <input type="range" id="volume-slider" min="0" max="100" value="50">
         </div>
 
         <section id="screen-menu" class="screen active">
-            <h1>Maple Typing</h1>
-            <div class="menu-grid">
-                <div class="menu-col">
-                    <button class="menu-btn" data-mode="jp_jp">
-                        <span class="main-text">日本語 → 日本語</span>
-                        <span class="sub-text">Romaji Input</span>
-                    </button>
-                    <button class="menu-btn" data-mode="kr_jp">
-                        <span class="main-text">韓国語 → 日本語</span>
-                        <span class="sub-text">Translate Mode</span>
-                    </button>
+            <div class="menu-layout">
+                <div class="menu-left">
+                    <button onclick="selectMode('1-1')">日本語表示 → 日本語入力</button>
+                    <button onclick="selectMode('1-2')">韓国語表示 → 日本語入力（準）</button>
                 </div>
-                <div class="menu-col">
-                    <button class="menu-btn" data-mode="kr_kr">
-                        <span class="main-text">韓国語 → 韓国語</span>
-                        <span class="sub-text">Hangul Input</span>
-                    </button>
-                    <button class="menu-btn" data-mode="jp_kr">
-                        <span class="main-text">日本語 → 韓国語</span>
-                        <span class="sub-text">Translate Mode</span>
-                    </button>
+                <div class="menu-right">
+                    <button onclick="selectMode('1-3')">韓国語表示 → 韓国語入力（準）</button>
+                    <button onclick="selectMode('1-4')">日本語表示 → 韓国語入力（準）</button>
                 </div>
-            </div>
-            <div class="menu-bottom">
-                <button class="menu-btn secondary" id="btn-wordbook">単語帳モード (Coming Soon)</button>
+                <div class="menu-bottom">
+                    <button onclick="selectMode('1-5')" class="btn-vocab">単語帳モード (Coming Soon)</button>
+                </div>
             </div>
         </section>
 
-        <section id="screen-difficulty" class="screen hidden">
+        <section id="screen-difficulty" class="screen">
             <h2>難易度選択</h2>
-            
-            <div class="settings-container">
-                <div class="setting-group">
-                    <h3>入力方式</h3>
-                    <div class="radio-group" id="input-method-options">
-                        </div>
-                </div>
-
-                <div class="setting-group">
-                    <h3>練習モード</h3>
-                    <label>
-                        <input type="checkbox" id="check-practice"> ガイドを表示する (ランク登録不可)
-                    </label>
-                </div>
+            <div class="input-method-select">
+                <label><input type="radio" name="input-method" value="romaji" checked> ローマ字入力</label>
+                <label id="kana-option"><input type="radio" name="input-method" value="kana"> かな入力</label>
             </div>
-
             <div class="difficulty-buttons">
-                <button class="diff-btn easy" data-diff="easy">Easy (60s)</button>
-                <button class="diff-btn normal" data-diff="normal">Normal (90s)</button>
-                <button class="diff-btn hard" data-diff="hard">Hard (120s)</button>
+                <button onclick="initReady('Easy')">Easy</button>
+                <button onclick="initReady('Normal')">Normal</button>
+                <button onclick="initReady('Hard')">Hard</button>
             </div>
-            
-            <p class="instruction">ESC: 戻る</p>
-        </section>
-
-        <section id="screen-game" class="screen hidden">
-            <div class="game-hud">
-                <div class="hp-container">
-                    <div class="hp-bar-bg">
-                        <div id="enemy-hp-bar" class="hp-bar-fill"></div>
-                    </div>
-                    <span id="enemy-hp-text">HP: 1000/1000</span>
-                </div>
-                <div class="timer-container">
-                    TIME: <span id="game-timer">60.00</span>
-                </div>
-            </div>
-
-            <div class="game-field">
-                <div class="enemy-area">
-                    <img src="image/enemy01.png" id="enemy-img" alt="Monster">
-                    <div id="damage-container"></div>
-                </div>
-
-                <div class="typing-area">
-                    <div id="display-text" class="display-text">---</div>
-                    <div id="reading-text" class="reading-text">---</div>
-                    
-                    <div class="input-wrapper">
-                        <input type="text" id="game-input" autocomplete="off" spellcheck="false">
-                        <div id="input-overlay" class="input-overlay"></div>
-                    </div>
-                </div>
-
-                <div class="combo-area">
-                    <span id="combo-count">0</span> COMBO
-                </div>
+            <div class="extra-settings">
+                <label><input type="checkbox" id="practice-mode"> 練習モード（ガイド表示あり）</label>
+                <p class="detail-settings">詳細設定（準備中） ></p>
             </div>
         </section>
 
-        <section id="screen-result" class="screen hidden">
-            <h2>RESULT</h2>
-            <div class="result-grid">
-                <div class="result-item"><span>Time</span><span id="res-time">--</span></div>
-                <div class="result-item"><span>Damage</span><span id="res-damage">--</span></div>
-                <div class="result-item"><span>Type Speed</span><span id="res-speed">--</span> /sec</div>
-                <div class="result-item"><span>Miss</span><span id="res-miss">--</span></div>
+        <section id="screen-ready" class="screen">
+            <div class="ready-content">
+                <h2 id="ready-diff-display">Difficulty: Normal</h2>
+                <p class="blink">Press [ Enter ] to Start!</p>
+                <p class="sub-text">(ESC to go back)</p>
+            </div>
+        </section>
+
+        <section id="screen-game" class="screen">
+            <div id="enemy-container">
+                <div id="enemy-hp-bar">
+                    <div id="hp-fill"></div>
+                    <span id="hp-text">1000 / 1000</span>
+                </div>
+                <div id="enemy-sprite">
+                    <img src="image/enemy01.png" alt="enemy" id="enemy-img">
+                </div>
             </div>
 
-            <div class="ranking-registration">
-                <input type="text" id="rank-name" placeholder="Enter Name" maxlength="12">
-                <button id="btn-register-rank">ランキング登録</button>
+            <div id="typing-box">
+                <p id="display-word">表示単語</p>
+                <p id="kana-guide"></p>
             </div>
 
-            <div class="action-buttons">
-                <button id="btn-tweet">Xで共有</button>
-                <button id="btn-retry">もう一度 (ESC)</button>
-                <button id="btn-title">タイトルへ (F5)</button>
+            <div id="game-info">
+                <div id="combo-display">Combo: 0</div>
+                <div id="time-display">Time: 00.00</div>
             </div>
 
-            <div class="ranking-list-container">
-                <h3>TOP 5 (Local)</h3>
-                <ul id="local-ranking-list"></ul>
+            <input type="text" id="type-input" autocomplete="off">
+        </section>
+
+        <section id="screen-result" class="screen">
+            <h2>Result</h2>
+            <div class="result-stats">
+                <p>討伐時間: <span id="res-time">0.00</span>s</p>
+                <p>ダメージ: <span id="res-damage">0</span></p>
+                <p>打鍵数: <span id="res-keys">0</span></p>
+                <p>ミス数: <span id="res-miss">0</span></p>
+            </div>
+            <div class="result-actions">
+                <button onclick="showRankingRegistration()">ランキング登録</button>
+                <button onclick="postToX()">Xでポスト</button>
+                <button onclick="toTitle()">タイトルへ(F5)</button>
             </div>
         </section>
     </div>
