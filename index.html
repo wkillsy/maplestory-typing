@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Maple Typing Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -34,6 +34,7 @@
             <h2>難易度選択</h2>
             <div class="input-method-select">
                 <label><input type="radio" name="input-method" value="romaji" checked> ローマ字入力</label>
+                <label><input type="radio" name="input-method" value="flick"> フリック入力</label>
                 <label id="kana-option"><input type="radio" name="input-method" value="kana"> かな入力(準備中)</label>
             </div>
             <div class="difficulty-buttons">
@@ -56,6 +57,17 @@
         </section>
 
         <section id="screen-game" class="screen">
+            <div class="game-header">
+                <div id="time-display">Time: 00.00</div>
+
+                <button onclick="retryGame()" class="btn-retry-game">リトライ (ESC)</button>
+
+                <div id="volume-control">
+                    <span>Vol</span>
+                    <input type="range" id="volume-slider" min="0" max="100" value="50">
+                </div>
+            </div>
+
             <div id="enemy-container">
                 <div id="enemy-hp-bar">
                     <div id="hp-fill"></div>
@@ -73,7 +85,6 @@
 
             <div id="game-info">
                 <div id="combo-display">Combo: 0</div>
-                <div id="time-display">Time: 00.00</div>
             </div>
 
             <input type="text" id="type-input" autocomplete="off" inputmode="search">
