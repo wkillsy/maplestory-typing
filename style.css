@@ -1,5 +1,5 @@
-/* =========================================
-   1. 基本リセット & 16:9 コンテナ
+﻿/* =========================================
+   1. 基本設定 & レイアウト
    ========================================= */
 * {
     box-sizing: border-box;
@@ -17,6 +17,7 @@ body {
     overflow: hidden;
 }
 
+/* 16:9のゲーム画面コンテナ */
 #game-viewport {
     position: relative;
     width: 90vw;
@@ -27,57 +28,52 @@ body {
     overflow: hidden;
 }
 
-/* =========================================
-   2. 画面切り替え & 背景レイヤー
-   ========================================= */
+/* 画面切り替えの基本設定 */
 .screen {
     display: none;
-    width: 100%;
-    height: 100%;
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: white;
+    background-size: cover;
+    background-position: center;
 }
 
     .screen.active {
         display: flex;
     }
 
-/* 背景画像の設定 */
+/* 各画面の背景画像 */
 #screen-menu, #screen-difficulty {
-    background: url('image/background01.png') no-repeat center center;
-    background-size: cover;
+    background-image: url('image/background01.png');
 }
 
 #screen-ready, #screen-game {
-    background: url('image/background02.png') no-repeat center center;
-    background-size: cover;
+    background-image: url('image/background02.png');
 }
 
 #screen-result {
-    background: url('image/background03.png') no-repeat center center;
-    background-size: cover;
+    background-image: url('image/background03.png');
 }
 
-    /* 暗幕(オーバーレイ)設定 
-   ★pointer-events: none; によりクリックが素通りするよう修正 */
-    #screen-menu::before, #screen-difficulty::before,
-    #screen-ready::before, #screen-game::before,
-    #screen-result::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
-        pointer-events: none;
-    }
+/* 背景の暗幕（オーバーレイ）共通設定 */
+.screen::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none; /* 下の要素をクリック可能に */
+}
 
+/* 画面ごとの暗さ調整 */
 #screen-menu::before, #screen-difficulty::before {
     background: rgba(0, 0, 0, 0.2);
 }
@@ -90,17 +86,16 @@ body {
     background: rgba(0, 0, 0, 0.4);
 }
 
-/* コンテンツを手前に出す設定（一括管理） */
-.menu-layout, .difficulty-buttons, h2,
-.input-method-select, .extra-settings,
-.ready-content, #enemy-container, #typing-box, #game-info,
+/* コンテンツを手前に出すための共通設定 */
+.menu-layout, .difficulty-buttons, h2, .ready-content,
+#enemy-container, #typing-box, .game-header,
 .result-stats, .result-actions, #ranking-container {
     position: relative;
     z-index: 10;
 }
 
 /* =========================================
-   3. HPバー & エネミー
+   2. 敵キャラクター & HPバー
    ========================================= */
 #enemy-hp-bar {
     width: 90%;
@@ -110,8 +105,6 @@ body {
     position: relative;
     margin: 10px auto 20px;
     border: 3px solid #222;
-    border-top-color: #666;
-    border-left-color: #666;
     border-radius: 4px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.5), inset 0 0 10px rgba(0,0,0,0.8);
     overflow: hidden;
@@ -131,10 +124,9 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #ffffff;
+    color: #fff;
     font-weight: bold;
     font-size: 18px;
-    font-family: 'Arial Black', sans-serif;
     text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
     z-index: 2;
 }
@@ -146,7 +138,6 @@ body {
     justify-content: center;
     align-items: flex-end;
     margin-bottom: 20px;
-    overflow: hidden;
 }
 
 #enemy-img {
@@ -154,7 +145,7 @@ body {
     max-height: 100%;
     width: auto;
     height: auto;
-    image-rendering: pixelated;
+    image-rendering: pixelated; /* ドット絵をくっきり */
     animation: floating 2s ease-in-out infinite;
 }
 
@@ -169,7 +160,7 @@ body {
 }
 
 /* =========================================
-   4. タイピング・ combat 演出
+   3. タイピングエリア & 演出
    ========================================= */
 #typing-box {
     background: rgba(0, 0, 0, 0.7);
@@ -177,7 +168,6 @@ body {
     border-radius: 15px;
     text-align: center;
     width: 80%;
-    margin: 10px 0;
 }
 
 #display-word {
@@ -189,14 +179,20 @@ body {
 #kana-guide {
     font-size: 1.8rem;
     font-family: 'Consolas', monospace;
-    font-weight: bold;
     min-height: 2.5rem;
 }
 
+/* 入力状態の文字色 */
 .char-typed {
     color: #ffd700;
     text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
     opacity: 1 !important;
+}
+
+/* 入力途中（濁点待ちなど）の文字色 */
+.char-pending {
+    color: #ff8c00; /* オレンジ色 */
+    text-shadow: 0 0 5px rgba(255, 140, 0, 0.7);
 }
 
 .practice-off .char-not-typed {
@@ -207,12 +203,12 @@ body {
     color: #556677;
 }
 
+/* ダメージ数字アニメーション */
 .damage-num {
     position: absolute;
     top: 15%;
     color: #ffff00;
     font-size: 2.5rem;
-    font-weight: bold;
     font-family: 'Arial Black', sans-serif;
     text-shadow: 2px 2px 0 #000, -2px -2px 0 #000;
     pointer-events: none;
@@ -236,7 +232,7 @@ body {
     }
 }
 
-/* フィニッシュバナー */
+/* リザルト時の巨大バナー */
 #finish-banner {
     position: absolute;
     top: 50%;
@@ -245,7 +241,7 @@ body {
     font-size: 8rem;
     color: #ff0000;
     font-weight: bold;
-    text-shadow: 4px 4px 0 #fff, -4px -4px 0 #fff, 4px -4px 0 #fff, -4px 4px 0 #fff, 0 8px 15px rgba(0,0,0,0.5);
+    text-shadow: 4px 4px 0 #fff, -4px -4px 0 #fff, 4px -4px 0 #fff, -4px 4px 0 #fff;
     z-index: 2000;
     white-space: nowrap;
     pointer-events: none;
@@ -270,7 +266,7 @@ body {
 }
 
 /* =========================================
-   5. メイプル風ボタン & UI
+   4. UIパーツ (ボタン・音量・ランキング)
    ========================================= */
 button {
     padding: 10px 25px;
@@ -295,28 +291,35 @@ button {
         box-shadow: 0 1px 0 #8b5a00;
     }
 
-/* スマホ対応：入力欄を画面外に置くが、完全に消さない */
-#type-input {
-    position: absolute;
-    opacity: 0;
-    left: 0;
-    top: 0;
-    width: 1px;
-    height: 1px;
-    pointer-events: none;
-}
-
-#volume-control {
+/* ゲーム中専用ヘッダーUI */
+.game-header {
     position: absolute;
     top: 10px;
-    right: 10px;
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     z-index: 100;
-    color: white;
 }
 
-/* =========================================
-   6. ランキング
-   ========================================= */
+.btn-retry-game {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid #fff;
+    color: #fff;
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    box-shadow: none;
+}
+
+/* 音量調整バー */
+#volume-control {
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* ランキングウィンドウ */
 #ranking-container {
     margin-top: 15px;
     width: 95%;
@@ -339,7 +342,6 @@ button {
     border-bottom: 3px solid #6b4a00;
     border-radius: 9px 9px 0 0;
     font-size: 1.2rem;
-    color: #6b4a00;
 }
 
 #ranking-table {
@@ -351,7 +353,6 @@ button {
         background: #e6d4a8;
         padding: 8px;
         border-bottom: 2px solid #6b4a00;
-        font-weight: bold;
     }
 
     #ranking-table td {
@@ -364,83 +365,110 @@ button {
         background: rgba(255, 255, 255, 0.3);
     }
 
-    /* 順位別の色 */
-    #ranking-table tbody tr:nth-child(1) td:first-child {
-        color: #d4af37;
-        font-weight: bold;
-        font-size: 1.2rem;
-    }
-
-    #ranking-table tbody tr:nth-child(2) td:first-child {
-        color: #aaa9ad;
-        font-weight: bold;
-    }
-
-    #ranking-table tbody tr:nth-child(3) td:first-child {
-        color: #b08d57;
-        font-weight: bold;
-    }
-
-/* カスタムスクロールバー */
-#ranking-container::-webkit-scrollbar {
-    width: 8px;
-}
-
-#ranking-container::-webkit-scrollbar-track {
-    background: #e6d4a8;
-    border-radius: 4px;
-}
-
-#ranking-container::-webkit-scrollbar-thumb {
-    background: #6b4a00;
-    border-radius: 4px;
+/* 入力用隠しinput */
+#type-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* =========================================
-   7. スマホ・レスポンシブ (メディアクエリ)
+   5. レスポンシブ調整 (スマホ・タブレット)
    ========================================= */
-@media (max-aspect-ratio: 1/1) {
-    #game-viewport {
-        width: 95vw;
-        aspect-ratio: 9 / 16;
+@media (max-width: 768px) {
+    /* 全体のレイアウトを上に寄せる */
+    #screen-game {
+        justify-content: flex-start;
+        padding-top: -30px;
+    }
+
+    #enemy-container {
+        transform: scale(0.7);
+        transform-origin: top center;
+        margin-bottom: -70px;
+    }
+
+    #typing-box {
+        margin-top: 0;
+        width: 98%;
+        padding: 10px;
     }
 
     #display-word {
-        font-size: 2.2rem;
+        font-size: 1.8rem;
     }
 
     #kana-guide {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
 
-    #ranking-container {
-        max-height: 180px;
+    /* UI要素の配置変更 */
+    .game-header {
+        flex-direction: column;
+        gap: 5px;
+        align-items: flex-end;
+    }
+
+    #volume-control {
+        transform: scale(0.8);
+        margin-right: -15px;
     }
 
     #finish-banner {
         font-size: 4rem;
     }
-}
 
-/* スマホ・タブレット（キーボード重なり防止） */
-@media (max-width: 768px) {
-    #enemy-container {
-        transform: scale(0.85);
-        margin-top: -10px;
+    #ranking-container {
+        max-height: 180px;
+        font-size: 0.8rem;
     }
 
     #typing-box {
-        margin-top: -30px;
-        width: 95%;
-        padding: 15px;
+        background: rgba(0, 0, 0, 0.85); /* 背景を濃くして文字をくっきりさせる */
+        border: 2px solid #ffd700; /* 金色の枠線で現在地を強調 */
     }
+}
 
-    #game-info {
-        position: absolute;
-        top: 5px;
-        width: 100%;
-        display: flex;
-        justify-content: space-around;
-        font-size: 0.9rem;
+/* 縦横比が1:1に近い場合の調整 */
+@media (max-aspect-ratio: 1/1) {
+    #game-viewport {
+        width: 95vw;
+        aspect-ratio: 9 / 16;
     }
+}
+/* キーボード候補バーが表示されるとき、UIを上へシフトして重なりを避ける */
+body.keyboard-open #game-viewport {
+    transform: translateY(-12vh);
+    transition: transform 0.18s ease-out;
+}
+
+/* 小さい画面では少し大きめにシフト */
+@media (max-width: 480px) {
+    body.keyboard-open #game-viewport { transform: translateY(-18vh); }
+}
+
+/* PC版ではフリック入力の選択肢を隠す */
+body.is-pc #option-flick {
+    display: none;
+}
+
+/* スマホ版ではかな入力の選択肢を隠す */
+body.is-mobile #kana-option {
+    display: none;
+}
+
+/* スマホ版：未入力文字の視認性向上（白文字＋黒縁取り） */
+body.is-mobile .char-not-typed {
+    color: #fff !important;
+    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+    opacity: 1 !important;
+}
+
+/* ラジオボタン（入力方式選択）の文字を見やすくする */
+.input-method-select label {
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+    margin-right: 10px;
+    cursor: pointer;
 }
